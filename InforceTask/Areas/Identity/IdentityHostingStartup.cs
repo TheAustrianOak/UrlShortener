@@ -16,16 +16,16 @@ namespace InforceTask.Areas.Identity
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
-                services.AddDbContext<AuthorizationDBContext>(options =>
+                services.AddDbContext<MainDbContext>(options =>
                     options.UseSqlServer(
-                        context.Configuration.GetConnectionString("AuthorizationDBContextConnection")));
+                        context.Configuration.GetConnectionString("ShortenerDBContextConnection")));
 
                 services.AddDefaultIdentity<ApplicationUser>(options => {
                     options.Password.RequireLowercase = false;
                     options.Password.RequireUppercase = false;
                     options.SignIn.RequireConfirmedAccount = false;
                 })
-                    .AddEntityFrameworkStores<AuthorizationDBContext>();
+                    .AddEntityFrameworkStores<MainDbContext>();
             });
         }
     }

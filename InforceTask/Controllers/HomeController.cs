@@ -22,7 +22,7 @@ namespace InforceTask.Controllers
 
         public IActionResult Index()
         {
-            return RedirectToAction(controllerName: "Home", actionName: "Create");
+            return RedirectToAction(controllerName: "UrlShortener", actionName: "Index");
         }
         
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
