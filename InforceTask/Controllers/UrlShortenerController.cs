@@ -8,16 +8,20 @@ using Microsoft.EntityFrameworkCore;
 using InforceTask.Models;
 using InforceTask.Helper;
 using InforceTask.Data;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace InforceTask.Controllers
 {
     public class UrlShortenerController : Controller
     {
         private readonly MainDbContext _context;
+        private readonly string userId;
 
-        public UrlShortenerController(MainDbContext context)
+        public UrlShortenerController(MainDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
         }
 
         // GET: UrlShortener
@@ -60,9 +64,12 @@ namespace InforceTask.Controllers
             if (ModelState.IsValid)
             {
                 var urlCode = shortUrl.Code = UrlShortenerHelper.Generate();
-                shortUrl.ShortedUrl = "http://localhost:50791/" + urlCode;
+
+                shortUrl.ShortedUrl = "http://localhost:49477/" + urlCode;
+
                 shortUrl.CreatedAt = DateTimeOffset.UtcNow.ToString();
-                //shortUrl.CreatedBy = _context.Users.Find(id);
+
+                shortUrl.CreatedBy = userId;
 
 
                 _context.Add(shortUrl);
