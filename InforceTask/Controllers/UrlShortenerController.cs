@@ -21,7 +21,7 @@ namespace InforceTask.Controllers
         public UrlShortenerController(MainDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
-            userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
         }
 
         // GET: UrlShortener
