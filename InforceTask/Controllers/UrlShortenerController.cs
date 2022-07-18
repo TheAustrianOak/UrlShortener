@@ -90,8 +90,6 @@ namespace InforceTask.Controllers
 
             var url = _context.Urls.Find(id);
 
-            ViewData["id"] = url.Id;
-
             if (url == null)
             {
                 return NotFound();
