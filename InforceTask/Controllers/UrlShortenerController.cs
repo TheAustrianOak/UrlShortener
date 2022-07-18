@@ -62,7 +62,7 @@ namespace InforceTask.Controllers
                 var urlCode = shortUrl.Code = UrlShortenerHelper.Generate();
                 shortUrl.ShortedUrl = "http://localhost:50791/" + urlCode;
                 shortUrl.CreatedAt = DateTimeOffset.UtcNow.ToString();
-                shortUrl.CreatedBy = "Current User";
+                //shortUrl.CreatedBy = _context.Users.Find(id);
 
 
                 _context.Add(shortUrl);
