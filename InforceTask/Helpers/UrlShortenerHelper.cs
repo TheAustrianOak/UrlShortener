@@ -13,7 +13,6 @@ namespace InforceTask.Helper
             var base64 = Convert.ToBase64String(guid.ToByteArray()).Replace("/", string.Empty).Replace("+", string.Empty);
             return base64.Substring(0, characters);
         }
-
         public static string Generate()
         {
             var code = Guid.NewGuid().ToUniqueBase64Url(NUMBER_OF_CHARACTERS);
