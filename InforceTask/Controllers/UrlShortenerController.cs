@@ -10,18 +10,19 @@ using InforceTask.Helper;
 using InforceTask.Data;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
+using InforceTask.Services;
 
 namespace InforceTask.Controllers
 {
     public class UrlShortenerController : Controller
     {
         private readonly MainDbContext _context;
-        private readonly string userId;
+        private readonly IHttpContextAccessorService _httpContextAccessor;
 
-        public UrlShortenerController(MainDbContext context, IHttpContextAccessor httpContextAccessor)
+        public UrlShortenerController(MainDbContext context, IHttpContextAccessorService httpContextAccessor)
         {
             _context = context;
-            userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         // GET: UrlShortener
@@ -69,7 +70,7 @@ namespace InforceTask.Controllers
 
                 shortUrl.CreatedAt = DateTimeOffset.UtcNow.ToString();
 
-                shortUrl.CreatedBy = userId;
+                shortUrl.CreatedBy = _httpContextAccessor.GetUser();
 
 
                 _context.Add(shortUrl);

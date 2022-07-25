@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using InforceTask.Services;
 
 namespace InforceTask
 {
@@ -25,6 +26,7 @@ namespace InforceTask
         {
             services.AddRazorPages();
             services.AddControllersWithViews();
+            services.AddScoped<IHttpContextAccessorService, HttpContextAccessorService>();
             services.AddHttpContextAccessor();
         }
 

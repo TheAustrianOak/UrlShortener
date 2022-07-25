@@ -8,6 +8,6 @@ namespace InforceTask.Services
 {
     public interface IHttpContextAccessorService
     {
-        public string GetUser(IHttpContextAccessor httpContextAccessor);
+        public string GetUser();
     }
 }

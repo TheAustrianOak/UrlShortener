@@ -9,10 +9,16 @@ namespace InforceTask.Services
 {
     public class HttpContextAccessorService : IHttpContextAccessorService
     {
-        private string userName;
-        public string GetUser(IHttpContextAccessor httpContextAccessor)
+     
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public HttpContextAccessorService(IHttpContextAccessor httpContextAccessor)
         {
-           return userName = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
+            _httpContextAccessor = httpContextAccessor;
+        }
+        public string GetUser()
+        {
+           return _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
         }
     }
 }
